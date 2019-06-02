@@ -27,7 +27,7 @@ export default class HomeScreen extends React.Component {
     }
 
     onLogin = () => {
-        axios.post('/user', {
+        axios.post('https://food-miles.herokuapp.com/login', {
             login: this.state.login,
             senha: this.state.senha,
         })
