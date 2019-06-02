@@ -9,11 +9,10 @@ import {
     View,
 } from 'react-native';
 import { Input, Item, Button, StyleProvider, Container, Header, Content, Card, CardItem, Icon, Left} from 'native-base';
-import { axios } from 'axios';
+import axios from 'axios';
 
-export default class HomeScreen extends React.Component {
+export default class LoginScreen extends React.Component {
     static navigationOptions = {
-        //title: 'X'
         header: null,
     };
 
@@ -21,18 +20,20 @@ export default class HomeScreen extends React.Component {
         super(props);
 
         this.state = {
-            login: '',
-            senha: '',
+            email: '',
+            password: '',
         }
     }
 
     onLogin = () => {
+
+        console.log("email: " + String(this.state.email) + " password: " + String(this.state.password));
+
         axios.post('https://food-miles.herokuapp.com/login', {
-            login: this.state.login,
+            login: this.state.login, 
             senha: this.state.senha,
         })
         .then(function (response) {
-            //VERIFICAR SE RETORNOU CERTO OU ERRADO
             console.log(response);
         })
         .catch(function (error) {
@@ -62,12 +63,12 @@ export default class HomeScreen extends React.Component {
                 <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center'}}>
                     <Item>
                         <Input
-                            onChangeText={(value) => { this.setState({ login: value }) }}
+                            onChangeText={(value) => { this.setState({ email: value }) }}
                             placeholder='Login' />
                     </Item>
                     <Item>
                         <Input
-                            onChangeText={(value) => { this.setState({ senha: value }) }}
+                            onChangeText={(value) => { this.setState({ password: value }) }}
                             placeholder='Senha' />
                     </Item>
                 </View>
@@ -76,7 +77,7 @@ export default class HomeScreen extends React.Component {
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <Button transparent style={{ padding: null }} 
                             onPress={() => {this.onLogin();}}>
-                            <Text>ENTRAR </Text>
+                            <Text>ENTRAR</Text>
                         </Button>
                     </View>
                 </View>
