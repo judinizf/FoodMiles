@@ -79,8 +79,7 @@ export default class LoginScreen extends React.Component {
                 </View>
 
                 <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                    <Button 
-                        title="Não tem cadastro? Clique Aqui!!"
+                    <Button transparent style={{ padding: 110 }}
                         onPress={() => {
                             this.props.navigation.dispatch(StackActions.reset({
                                 index: 0,
@@ -88,8 +87,9 @@ export default class LoginScreen extends React.Component {
                                     NavigationActions.navigate({ routeName: 'Signup' })
                                 ],
                             }))
-                        }}
-                    />
+                        }}>
+                        <Text>Não tem cadastro? Clique Aqui!!</Text>
+                    </Button>
                 </View>    
 
                 <View style={{ margin: 20 }}>

@@ -1,5 +1,9 @@
 import React from 'react';
 import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
+import SignupProduct from './screens/SignupProduct';
+
 
 const AppNavigator = createStackNavigator({
   Login: {
@@ -8,8 +12,11 @@ const AppNavigator = createStackNavigator({
   Signup: {
     screen: SignupScreen,
   },
+  Product: {
+    screen: SignupProduct,
+  },
 }, {
-    initialRouteName: 'Signup',
+    initialRouteName: 'Login',
 });
 
 export default createAppContainer(AppNavigator);

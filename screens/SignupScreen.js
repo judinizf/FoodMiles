@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Input, Item, Button, StyleProvider, Container, Header, Content, Card, CardItem, Icon, Left} from 'native-base';
 import axios from 'axios';
+import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
 export default class SignupScreen extends React.Component {
     static navigationOptions = {
@@ -52,9 +53,12 @@ export default class SignupScreen extends React.Component {
             //OS COMPONENTES DA TELA TEM QUE SER CRIADO AQUI DENTRO
             <View style={styles.container}>
 
+                <View style={styles.v5}>
+                    <Text> </Text>
+                </View>
 
                 <View style={styles.v1}>
-                    <Image source={{uri: 'https://i.imgur.com/WJOAW4E.png'}} style={{height: 200, width: 200, flex: 1}}/>
+                    <Image source={{uri: 'https://i.imgur.com/WJOAW4E.png'}} style={{height: 150, width: 150, flex: 1}}/>
                 </View>    
 
                 <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center'}}>
@@ -85,13 +89,18 @@ export default class SignupScreen extends React.Component {
                     </Item>
                 </View>
 
-                <View style={styles.v4}> 
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Button transparent style={{ padding: null }} 
-                            onPress={() => {this.onLogin();}}>
-                            <Text>CADASTRAR</Text>
-                        </Button>
-                    </View>
+                <View style={styles.v4}>
+                    <Button transparent style={{ padding: 151 }}
+                        onPress={() => {
+                            this.props.navigation.dispatch(StackActions.reset({
+                                index: 0,
+                                actions: [
+                                    NavigationActions.navigate({ routeName: 'Product' })
+                                ],
+                            }))
+                        }}>
+                        <Text>CADASTRAR</Text>
+                    </Button>
                 </View>
 
                 <Text style={{ fontSize: 50 }}>  {this.state.nome}  </Text>
@@ -108,9 +117,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#F4F7ED',
     },
     v1: {
-        flex: 5,
-        height: 420,
-        width: 420,
+        height: 150,
+        width: 150,
         backgroundColor: '#F4F7ED',
         justifyContent: 'center',
         alignItems: 'center',
