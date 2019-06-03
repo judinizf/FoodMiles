@@ -1,10 +1,30 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
-import LoginScreen from './screens/LoginScreen';
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
-export default class App extends React.Component {
+const AppNavigator = createStackNavigator({
+  Login: {
+    screen: LoginScreen,
+  },
+  Signup: {
+    screen: SignupScreen,
+  },
+}, {
+    initialRouteName: 'Signup',
+});
+
+export default createAppContainer(AppNavigator);
+
+/*
+const App = createAppContainer(
+    createStackNavigator({
+        Login: { screen: LoginScreen },
+        Signup: { screen: SignupScreen },
+    })
+);
+
+export default App;*/
+
+/*export default class App extends React.Component {
     state = {
         isLoadingComplete: false,
     };
@@ -59,4 +79,4 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-});
+});*/

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { Input, Item, Button, StyleProvider, Container, Header, Content, Card, CardItem, Icon, Left} from 'native-base';
 import axios from 'axios';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
+import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
@@ -79,10 +79,17 @@ export default class LoginScreen extends React.Component {
                 </View>
 
                 <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                    <Button transparent style={{ padding: 105}} 
-                        onPress={() => this.props.navigation.navigate('Signup')}>
-                        <Text>Esqueceu sua senha? Click Aqui!</Text>
-                    </Button>
+                    <Button 
+                        title="Não tem cadastro? Clique Aqui!!"
+                        onPress={() => {
+                            this.props.navigation.dispatch(StackActions.reset({
+                                index: 0,
+                                actions: [
+                                    NavigationActions.navigate({ routeName: 'Signup' })
+                                ],
+                            }))
+                        }}
+                    />
                 </View>    
 
                 <View style={{ margin: 20 }}>

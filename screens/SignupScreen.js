@@ -24,6 +24,7 @@ export default class SignupScreen extends React.Component {
             cpf: '',
             email: '',
             password: '',
+            telephone: '',
         }
     }
 
@@ -36,6 +37,7 @@ export default class SignupScreen extends React.Component {
             cpf: this.state.cpf, 
             email: this.state.email, 
             password: this.state.password,
+            telephone: this.state.telephone,
         })
         .then(function (response) {
             console.log(response);
@@ -75,6 +77,11 @@ export default class SignupScreen extends React.Component {
                         <Input
                             onChangeText={(value) => { this.setState({ password: value }) }}
                             placeholder='Senha' />
+                    </Item>
+                    <Item>
+                        <Input
+                            onChangeText={(value) => { this.setState({ telephone: value }) }}
+                            placeholder='Telefone' />
                     </Item>
                 </View>
 
