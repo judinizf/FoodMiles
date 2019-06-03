@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Input, Item, Button, StyleProvider, Container, Header, Content, Card, CardItem, Icon, Left} from 'native-base';
 import axios from 'axios';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
@@ -47,13 +48,8 @@ export default class LoginScreen extends React.Component {
             <View style={styles.container}>
 
                 <View style={styles.v5}>
-                    <Header transparent>
-                        <Left>
-                            <Button transparent dark >
-                                <Icon name="arrow-back" />
-                            </Button>
-                        </Left>
-                    </Header>
+                    <Text> </Text>
+                    <Text> </Text>        
                 </View>
 
                 <View style={styles.v1}>
@@ -82,6 +78,13 @@ export default class LoginScreen extends React.Component {
                     </View>
                 </View>
 
+                <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+                    <Button transparent style={{ padding: 105}} 
+                        onPress={() => this.props.navigation.navigate('Signup')}>
+                        <Text>Esqueceu sua senha? Click Aqui!</Text>
+                    </Button>
+                </View>    
+
                 <View style={{ margin: 20 }}>
                     <Button rounded style={{ justifyContent: 'center', alignItems: 'center', width: 385 }} 
                         onPress={() => {this.onLogin();}}>
@@ -92,14 +95,14 @@ export default class LoginScreen extends React.Component {
                 <View style={{ margin: 20 }}>
                     <Button info rounded style={{ justifyContent: 'center', alignItems: 'center', width: 385 }} 
                         onPress={() => {this.onLogin();}}>
-                        <Text>ENTRE COM FACEBOOK</Text>
+                        <Text>ENTRE COM TWITTER</Text>
                     </Button>
                 </View>
 
                 <View style={{ margin: 20 }}>
                     <Button danger rounded style={{ justifyContent: 'center', alignItems: 'center', width: 385 }} 
                         onPress={() => {this.onLogin();}}>
-                        <Text>ENTRE COM FACEBOOK</Text>
+                        <Text>ENTRE COM GOOGLE</Text>
                     </Button>
                 </View>
 
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#F4F7ED',
     },
     v1: {
-        flex: 5,
+        flex: 6,
         height: 420,
         width: 420,
         backgroundColor: '#F4F7ED',
