@@ -71,13 +71,39 @@ export default class HomeScreen extends React.Component {
                     <Button transparent>
                         <Text>Buscar produtos e lojinhas</Text>
                     </Button>
-                </Header>    
+                </Header>
 
-                <View style={styles.MainContainer}>
-                    <TouchableOpacity onPress = {() => { alert(":D") }}>
-                        <Image source={{ uri:'https://img.icons8.com/doodle/48/000000/sunflower.png',}} style={styles.v6}/>
-                    </TouchableOpacity> 
-                </View>
+                <ScrollView horizontal>
+                    <View>
+                        <TouchableOpacity onPress = {() => { alert(":D") }}>
+                            <Image source={{ uri:'https://img.icons8.com/cotton/100/000000/lettuce.png',}} style={styles.v6}/>
+                        </TouchableOpacity> 
+                    </View>    
+
+                    <View>
+                        <TouchableOpacity onPress = {() => { alert(":D") }}>
+                            <Image source={{ uri:'https://img.icons8.com/cotton/100/000000/wrap.png',}} style={styles.v6}/>
+                        </TouchableOpacity> 
+                    </View>
+
+                    <View>
+                        <TouchableOpacity onPress = {() => { alert(":D") }}>
+                            <Image source={{ uri:'https://img.icons8.com/cotton/100/000000/jam.png',}} style={styles.v6}/>
+                        </TouchableOpacity> 
+                    </View>
+
+                    <View>
+                        <TouchableOpacity onPress = {() => { alert(":D") }}>
+                            <Image source={{ uri:'https://img.icons8.com/cotton/100/000000/avocado.png',}} style={styles.v6}/>
+                        </TouchableOpacity> 
+                    </View>
+
+                    <View>
+                        <TouchableOpacity onPress = {() => { alert(":D") }}>
+                            <Image source={{ uri:'https://img.icons8.com/cotton/100/000000/cupcake-with-a-berry.png',}} style={styles.v6}/>
+                        </TouchableOpacity> 
+                    </View>                    
+                </ScrollView>
 
                 <View style={styles.MainContainer}>
                     <TouchableOpacity style={styles.FacebookStyle} activeOpacity={0.5}>
@@ -86,38 +112,6 @@ export default class HomeScreen extends React.Component {
                         <Text style={styles.TextStyle}> Login Using Facebook </Text>
                     </TouchableOpacity> 
                 </View>
-
-                <ScrollView horizontal>
-                    <View>
-                        <TouchableOpacity onPress = {() => { alert(":D") }}>
-                            <Image source={{ uri:'https://img.icons8.com/doodle/48/000000/sunflower.png',}} style={styles.v6}/>
-                        </TouchableOpacity> 
-                    </View>    
-
-                    <View>
-                        <TouchableOpacity onPress = {() => { alert(":D") }}>
-                            <Image source={{ uri:'https://img.icons8.com/doodle/48/000000/sunflower.png',}} style={styles.v6}/>
-                        </TouchableOpacity> 
-                    </View>
-
-                    <View>
-                        <TouchableOpacity onPress = {() => { alert(":D") }}>
-                            <Image source={{ uri:'https://img.icons8.com/doodle/48/000000/sunflower.png',}} style={styles.v6}/>
-                        </TouchableOpacity> 
-                    </View>
-
-                    <View>
-                        <TouchableOpacity onPress = {() => { alert(":D") }}>
-                            <Image source={{ uri:'https://img.icons8.com/doodle/48/000000/sunflower.png',}} style={styles.v6}/>
-                        </TouchableOpacity> 
-                    </View>
-
-                    <View>
-                        <TouchableOpacity onPress = {() => { alert(":D") }}>
-                            <Image source={{ uri:'https://img.icons8.com/doodle/48/000000/sunflower.png',}} style={styles.v6}/>
-                        </TouchableOpacity> 
-                    </View>                    
-                </ScrollView>
 
                 <Text style={{ fontSize: 50 }}>  {this.state.nome}  </Text>
 
@@ -156,8 +150,8 @@ const styles = StyleSheet.create({
         color: '#7FA99B',
     },
     v6: {
-        height: 100,
-        width: 100,
+        height: 120,
+        width: 120,
         borderColor: '#FFD54D',
         borderRadius: 90,
         margin: 30,
