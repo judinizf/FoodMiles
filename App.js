@@ -3,7 +3,7 @@ import { createAppContainer, createStackNavigator, StackActions, NavigationActio
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import SignupProduct from './screens/SignupProduct';
-
+import HomeScreen from './screens/HomeScreen';
 
 const AppNavigator = createStackNavigator({
   Login: {
@@ -14,6 +14,9 @@ const AppNavigator = createStackNavigator({
   },
   Product: {
     screen: SignupProduct,
+  },
+  Home: {
+    screen: HomeScreen,
   },
 }, {
     initialRouteName: 'Login',

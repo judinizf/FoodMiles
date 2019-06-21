@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Input, Item, Button, StyleProvider, Container, Header, Content, Card, CardItem, Icon, Left} from 'native-base';
 import axios from 'axios';
+import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
 export default class SignupProduct extends React.Component {
     static navigationOptions = {
@@ -96,13 +97,18 @@ export default class SignupProduct extends React.Component {
                     </Item>
                 </View>
 
-                <View style={styles.v4}> 
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Button transparent style={{ padding: null }} 
-                            onPress={() => {this.onLogin();}}>
-                            <Text>CADASTRAR PRODUTO</Text>
-                        </Button>
-                    </View>
+                <View style={styles.v4}>
+                    <Button transparent style={{ padding: 151 }}
+                        onPress={() => {
+                            this.props.navigation.dispatch(StackActions.reset({
+                                index: 0,
+                                actions: [
+                                    NavigationActions.navigate({ routeName: 'Home' })
+                                ],
+                            }))
+                        }}>
+                        <Text>CADASTRAR</Text>
+                    </Button>
                 </View>
 
                 <Text style={{ fontSize: 50 }}>  {this.state.nome}  </Text>
