@@ -44,7 +44,6 @@ export default class LoginScreen extends React.Component {
 
     render() {
         return (
-            //OS COMPONENTES DA TELA TEM QUE SER CRIADO AQUI DENTRO
             <View style={styles.container}>
 
                 <View style={styles.v5}>

@@ -52,7 +52,6 @@ export default class SignupProduct extends React.Component {
 
     render() {
         return (
-            //OS COMPONENTES DA TELA TEM QUE SER CRIADO AQUI DENTRO
             <View style={styles.container}>
 
                 <View style={styles.v5}>
@@ -103,7 +102,7 @@ export default class SignupProduct extends React.Component {
                             this.props.navigation.dispatch(StackActions.reset({
                                 index: 0,
                                 actions: [
-                                    NavigationActions.navigate({ routeName: 'Home' })
+                                    NavigationActions.navigate({ routeName: 'Carousel' })
                                 ],
                             }))
                         }}>
