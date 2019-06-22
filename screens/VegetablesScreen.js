@@ -12,6 +12,7 @@ import {
 import { Input, Item, Button, Right, Thumbnail, Body, ListItem, StyleProvider, Container, Header, Content, Card, CardItem, Icon, Left} from 'native-base';
 import axios from 'axios';
 import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
+import ProductCard from '../components/ProductCard'; 
 
 export default class VegetablesScreen extends React.Component {
     static navigationOptions = {
@@ -24,6 +25,11 @@ export default class VegetablesScreen extends React.Component {
         this.state = {
             email: '',
             password: '',
+            category: '',
+            products_list: '',
+            seller_name: '',
+            seller_picture: '',
+            picture_url: '',
         }
     }
 
@@ -43,11 +49,45 @@ export default class VegetablesScreen extends React.Component {
         });
     }
 
+    onVeg = () => {
+
+        //console.log("email: " + String(this.state.email) + " password: " + String(this.state.password));
+
+        axios.get('https://food-miles.herokuapp.com/categories', {
+            category: this.state.category, 
+        })
+        .then(response => response.data)
+        .then((response) =>  {
+            console.log(response);
+
+            /*response.map(async (product) => {
+              const img_product = await axios.get(
+                'https://food-miles.herokuapp.com/products/image',
+                {
+                  seller_email: product.seller_email,
+                  product_name: product.product_name, 
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    return product;
+                });
+
+              return {...product, img_product};
+            })
+            this.setState({...this.state, products_list: response});
+            */
+            this.setState({...this.state, products_list: response});
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+
     render() {
         return (
             <View style={styles.container}>
 
-                <View style={styles.v5}>
+                <View>
                     <Text> </Text>
                 </View>
 
@@ -73,6 +113,21 @@ export default class VegetablesScreen extends React.Component {
                     </Button>
                 </Header>
 
+                <Button transparent onPress={() => {this.onVeg();}}>
+                    <Text> CLICAAAAAA </Text>
+                </Button>
+
+                <ScrollView vertical>
+                    {Object.keys(this.state.products_list).map((category) => {
+                        return Object.keys(this.state.products_list[category]).map((product) => {
+                            return (
+                                <ProductCard product={(this.state.products_list[category][product])}>
+                                </ProductCard>)
+                        })       
+                    })}
+                </ScrollView>
+
+                {/*
                 <ScrollView vertical>
                     <View>
                         <Card style={styles.v6}>
@@ -176,7 +231,7 @@ export default class VegetablesScreen extends React.Component {
                         </Card>
                     </View>                     
                     
-                </ScrollView>
+                </ScrollView>*/}
 
                 <Text style={{ fontSize: 50 }}>  {this.state.nome}  </Text>
 
