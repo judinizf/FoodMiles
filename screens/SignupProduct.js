@@ -110,8 +110,6 @@ export default class SignupProduct extends React.Component {
                     </Button>
                 </View>
 
-                <Text style={{ fontSize: 50 }}>  {this.state.nome}  </Text>
-
             </View>
         );
     }

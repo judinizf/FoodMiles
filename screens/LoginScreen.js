@@ -52,7 +52,7 @@ export default class LoginScreen extends React.Component {
                 </View>
 
                 <View style={styles.v1}>
-                    <Image source={{uri: 'https://i.imgur.com/CAsiB8Y.png'}} style={{height: 200, width: 200, flex: 1}}/>
+                    <Image source={{uri: 'https://i.imgur.com/CAsiB8Y.png'}} style={{height: 200, width: 200}}/>
                 </View>    
 
                 <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center'}}>
@@ -111,8 +111,6 @@ export default class LoginScreen extends React.Component {
                         <Text>ENTRE COM GOOGLE</Text>
                     </Button>
                 </View>
-
-                <Text style={{ fontSize: 50 }}>  {this.state.nome}  </Text>
 
             </View>
         );

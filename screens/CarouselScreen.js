@@ -121,9 +121,7 @@ export default class CarouselScreen extends React.Component {
                         <Text style={styles.TextStyle}> Login Using Facebook </Text>
                     </TouchableOpacity> 
                 </View>
-
-                <Text style={{ fontSize: 50 }}>  {this.state.nome}  </Text>
-
+                
             </View>
         );
     }

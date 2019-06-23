@@ -9,7 +9,7 @@ import {
     TouchableWithoutFeedback,
     View,
 } from 'react-native';
-import { Input, Item, Button, Right, Thumbnail, Body, ListItem, StyleProvider, Container, Header, Content, Card, CardItem, Icon, Left} from 'native-base';
+import { Input, Item, Button, Right, H1, Thumbnail, Body, ListItem, StyleProvider, Container, Header, Content, Card, CardItem, Icon, Left} from 'native-base';
 import axios from 'axios';
 import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 import ProductCard from '../components/ProductCard'; 
@@ -51,31 +51,12 @@ export default class VegetablesScreen extends React.Component {
 
     onVeg = () => {
 
-        //console.log("email: " + String(this.state.email) + " password: " + String(this.state.password));
-
         axios.get('https://food-miles.herokuapp.com/categories', {
             category: this.state.category, 
         })
         .then(response => response.data)
         .then((response) =>  {
             console.log(response);
-
-            /*response.map(async (product) => {
-              const img_product = await axios.get(
-                'https://food-miles.herokuapp.com/products/image',
-                {
-                  seller_email: product.seller_email,
-                  product_name: product.product_name, 
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    return product;
-                });
-
-              return {...product, img_product};
-            })
-            this.setState({...this.state, products_list: response});
-            */
             this.setState({...this.state, products_list: response});
         })
         .catch(function (error) {
@@ -83,39 +64,50 @@ export default class VegetablesScreen extends React.Component {
         })
     }
 
+    getData(){
+        this.onVeg();
+    }
+
+    componentDidMount(){
+        this.getData();
+    }
+
     render() {
         return (
             <View style={styles.container}>
 
-                <View>
-                    <Text> </Text>
-                </View>
+                {this.state.data}
 
-                <TouchableWithoutFeedback
-                    onPress={() => {
-                        this.props.navigation.dispatch(StackActions.reset({
-                            index: 0,
-                            actions: [
-                                NavigationActions.navigate({ routeName: 'Carousel' })
-                            ],
-                        }))
-                    }}>
-                    <Image source={{ uri:'https://i.imgur.com/zEmJJct.png',}} style={styles.v8}/>
-                </TouchableWithoutFeedback>
+                <Header transparent>
+                    <Left>
+                        <Button transparent 
+                        onPress={() => {
+                            this.props.navigation.dispatch(StackActions.reset({
+                                index: 0,
+                                actions: [
+                                    NavigationActions.navigate({ routeName: 'Carousel' })
+                                ],
+                            }))
+                        }}>
+                            <Icon name='arrow-back' />
+                        </Button>
+                    </Left>
+                    <Body>
+                        <Text>{JSON.stringify([this.state.category])}</Text>
+                    </Body>
+                    <Right>
+                        <Image source={{uri: 'https://i.imgur.com/WJOAW4E.png'}} style={{height: 60, width: 60}}/>
+                    </Right>
+                </Header>
 
                 <Header transparent searchBar rounded>
                     <Item>
                         <Icon name="ios-search" />
-                        <Input placeholder="Search" />
+                        <Input placeholder="Buscar produtos e lojinhas" />
                     </Item>
                     <Button transparent>
-                        <Text>Buscar produtos e lojinhas</Text>
                     </Button>
                 </Header>
-
-                <Button transparent onPress={() => {this.onVeg();}}>
-                    <Text> CLICAAAAAA </Text>
-                </Button>
 
                 <ScrollView vertical>
                     {Object.keys(this.state.products_list).map((category) => {
@@ -126,114 +118,6 @@ export default class VegetablesScreen extends React.Component {
                         })       
                     })}
                 </ScrollView>
-
-                {/*
-                <ScrollView vertical>
-                    <View>
-                        <Card style={styles.v6}>
-                            <CardItem style={styles.v7}>
-                                <Left>
-                                    <Thumbnail source={{uri: 'https://img.icons8.com/bubbles/100/000000/audrey-hepburn.png'}} />
-                                    <Body>
-                                        <Text>Nome da Lojinha</Text>
-                                        <Text note>Descrição</Text>
-                                    </Body>
-                                </Left>
-                            </CardItem>
-                            <CardItem cardBody style={styles.v7}>
-                                <Image source={{uri: 'https://www.embrapa.br/image/journal/article?img_id=35185802&t=1529407524819'}} style={{height: 260, width: null, flex: 1}}/>
-                            </CardItem>
-                            <CardItem style={styles.v7}>
-                                <Left>
-                                    <Button transparent>
-                                          <Icon active name="thumbs-up" />
-                                          <Text>12 Likes</Text>
-                                    </Button>
-                                </Left>
-                                <Body>
-                                    <Button transparent>
-                                        <Icon active name="chatbubbles" />
-                                        <Text>4 Comments</Text>
-                                    </Button>
-                                </Body>
-                                <Right>
-                                    <Text>11h ago</Text>
-                                </Right>
-                            </CardItem>
-                        </Card>
-                    </View>    
-
-                    <View>
-                        <Card style={styles.v6}>
-                            <CardItem style={styles.v7}>
-                                <Left>
-                                    <Thumbnail source={{uri: 'https://img.icons8.com/bubbles/100/000000/audrey-hepburn.png'}} />
-                                    <Body>
-                                        <Text>Nome da Lojinha</Text>
-                                        <Text note>Descrição</Text>
-                                    </Body>
-                                </Left>
-                            </CardItem>
-                            <CardItem cardBody style={styles.v7}>
-                                <Image source={{uri: 'https://www.agromogiana.com.br/wp-content/uploads/2019/03/Cenoura-750x460.jpg'}} style={{height: 260, width: null, flex: 1}}/>
-                            </CardItem>
-                            <CardItem style={styles.v7}>
-                                <Left>
-                                    <Button transparent>
-                                          <Icon active name="thumbs-up" />
-                                          <Text>12 Likes</Text>
-                                    </Button>
-                                </Left>
-                                <Body>
-                                    <Button transparent>
-                                        <Icon active name="chatbubbles" />
-                                        <Text>4 Comments</Text>
-                                    </Button>
-                                </Body>
-                                <Right>
-                                    <Text>11h ago</Text>
-                                </Right>
-                            </CardItem>
-                        </Card>
-                    </View> 
-
-                    <View>
-                        <Card style={styles.v6}>
-                            <CardItem style={styles.v7}>
-                                <Left>
-                                    <Thumbnail source={{uri: 'https://img.icons8.com/bubbles/100/000000/audrey-hepburn.png'}} />
-                                    <Body>
-                                        <Text>Nome da Lojinha</Text>
-                                        <Text note>Descrição</Text>
-                                    </Body>
-                                </Left>
-                            </CardItem>
-                            <CardItem cardBody style={styles.v7}>
-                                <Image source={{uri: 'https://souagro.com.br/wp-content/uploads/2018/01/beterraba_beneficios_374278960.jpg'}} style={{height: 260, width: null, flex: 1}}/>
-                            </CardItem>
-                            <CardItem style={styles.v7}>
-                                <Left>
-                                    <Button transparent>
-                                          <Icon active name="thumbs-up" />
-                                          <Text>12 Likes</Text>
-                                    </Button>
-                                </Left>
-                                <Body>
-                                    <Button transparent>
-                                        <Icon active name="chatbubbles" />
-                                        <Text>4 Comments</Text>
-                                    </Button>
-                                </Body>
-                                <Right>
-                                    <Text>11h ago</Text>
-                                </Right>
-                            </CardItem>
-                        </Card>
-                    </View>                     
-                    
-                </ScrollView>*/}
-
-                <Text style={{ fontSize: 50 }}>  {this.state.nome}  </Text>
 
             </View>
         );
@@ -247,37 +131,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#F4F7ED',
     },
     v1: {
-        height: 80,
-        width: 80,
-        backgroundColor: '#F4F7ED',
+        color: '#7FA99B',
+        //fontFamily: 'Arvo',
     },
     v2: {
-        flex: 1,
-        color: '#7FA99B',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    v4: {
-        height: 44,
-        width: 385,
-        backgroundColor: '#7FA99B',
-        borderRadius: 30,
-        margin: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    v5: {
-        color: '#7FA99B',
-    },
-    v6: {
-        height: 419,
-        width: 419,
-        backgroundColor: '#7FA99B',
-        borderRadius: 30,
-    },
-    v7: {
-        borderRadius: 30,
-        backgroundColor: '#7FA99B',
+        justifyContent: "space-between",
     },
     v8:{
         height: 80,
