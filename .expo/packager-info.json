@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 4737,
+  "expoServerNgrokUrl": "https://mq-6yu.anonymous.foodmiles.exp.direct",
+  "packagerNgrokUrl": "https://packager.mq-6yu.anonymous.foodmiles.exp.direct",
+  "ngrokPid": 4823,
   "webpackServerPort": null
 }
