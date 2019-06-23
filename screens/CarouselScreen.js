@@ -1,17 +1,15 @@
 import React from 'react';
 import {
+    ActivityIndicator,
     Image,
-    Platform,
     ScrollView,
     StyleSheet,
     Text,
     TouchableOpacity,
-    TouchableHighlight,
     View,
 } from 'react-native';
-import { Input, Item, Button, Right, Thumbnail, Body, ListItem, StyleProvider, Container, Header, Content, Card, CardItem, Icon, Left} from 'native-base';
+import { Input, Item, Button, Right, Thumbnail, Body, ListItem, Header, Icon, Left} from 'native-base';
 import axios from 'axios';
-import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
 export default class CarouselScreen extends React.Component {
     static navigationOptions = {
@@ -24,6 +22,7 @@ export default class CarouselScreen extends React.Component {
         this.state = {
             email: '',
             password: '',
+            loading: true,
             categories_list: {},
             category_images: {
                 Vegetais: 'https://img.icons8.com/cotton/100/000000/lettuce.png',
@@ -55,7 +54,7 @@ export default class CarouselScreen extends React.Component {
       axios.get('https://food-miles.herokuapp.com/categories')
         .then(response => response.data)
         .then((response) =>  {
-          this.setState({...this.state, categories_list: response});
+          this.setState({...this.state, loading: false, categories_list: response});
         })
         .catch((error) => {
           console.error(error);
@@ -97,6 +96,7 @@ export default class CarouselScreen extends React.Component {
                     </Button>
                 </Header>
 
+                <ActivityIndicator size="large" animating={this.state.loading} />
                 <ScrollView horizontal>
                     {
                         Object.keys(this.state.categories_list).map((category) => (
