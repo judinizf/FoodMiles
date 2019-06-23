@@ -24,6 +24,14 @@ export default class CarouselScreen extends React.Component {
         this.state = {
             email: '',
             password: '',
+            categories_list: {},
+            category_images: {
+                Vegetais: 'https://img.icons8.com/cotton/100/000000/lettuce.png',
+                Frutas: 'https://img.icons8.com/cotton/100/000000/lettuce.png',
+                Salgados: 'https://img.icons8.com/cotton/100/000000/lettuce.png',
+                Doces: 'https://img.icons8.com/cotton/100/000000/lettuce.png',
+                "Feito em Casa": 'https://img.icons8.com/cotton/100/000000/lettuce.png',
+            }
         }
     }
 
@@ -41,6 +49,21 @@ export default class CarouselScreen extends React.Component {
         .catch(function (error) {
             console.log(error);
         });
+    }
+
+    getData() {
+      axios.get('https://food-miles.herokuapp.com/categories')
+        .then(response => response.data)
+        .then((response) =>  {
+          this.setState({...this.state, categories_list: response});
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+    }
+
+    componentDidMount(){
+      this.getData();
     }
 
     render() {
@@ -75,43 +98,19 @@ export default class CarouselScreen extends React.Component {
                 </Header>
 
                 <ScrollView horizontal>
-                    <View>
-                        <TouchableOpacity 
-                            onPress={() => {
-                                this.props.navigation.dispatch(StackActions.reset({
-                                    index: 0,
-                                    actions: [
-                                        NavigationActions.navigate({ routeName: 'Vegetables' })
-                                    ],
-                                }))
-                            }}>
-                            <Image source={{ uri:'https://img.icons8.com/cotton/100/000000/lettuce.png',}} style={styles.v6}/>
-                        </TouchableOpacity> 
-                    </View>    
-
-                    <View>
-                        <TouchableOpacity onPress = {() => { alert(":D") }}>
-                            <Image source={{ uri:'https://img.icons8.com/cotton/100/000000/wrap.png',}} style={styles.v6}/>
-                        </TouchableOpacity> 
-                    </View>
-
-                    <View>
-                        <TouchableOpacity onPress = {() => { alert(":D") }}>
-                            <Image source={{ uri:'https://img.icons8.com/cotton/100/000000/jam.png',}} style={styles.v6}/>
-                        </TouchableOpacity> 
-                    </View>
-
-                    <View>
-                        <TouchableOpacity onPress = {() => { alert(":D") }}>
-                            <Image source={{ uri:'https://img.icons8.com/cotton/100/000000/avocado.png',}} style={styles.v6}/>
-                        </TouchableOpacity> 
-                    </View>
-
-                    <View>
-                        <TouchableOpacity onPress = {() => { alert(":D") }}>
-                            <Image source={{ uri:'https://img.icons8.com/cotton/100/000000/cupcake-with-a-berry.png',}} style={styles.v6}/>
-                        </TouchableOpacity> 
-                    </View>                    
+                    {
+                        Object.keys(this.state.categories_list).map((category) => (
+                            <View key={category}>
+                                <TouchableOpacity
+                                    onPress={() => this.props.navigation.navigate('Vegetables', {
+                                        products_list: this.state.categories_list[category],
+                                        category: category,
+                                    })}>
+                                    <Image source={{ uri: this.state.category_images[category]}} style={styles.v6}/>
+                                </TouchableOpacity>
+                            </View>
+                        ))
+                    }
                 </ScrollView>
 
                 <View style={styles.MainContainer}>
@@ -119,9 +118,8 @@ export default class CarouselScreen extends React.Component {
                         <Image source={{ uri:'http://aboutreact.com/wp-content/uploads/2018/08/facebook.png.png',}} style={styles.ImageIconStyle}/>
                         <View style={styles.SeparatorLine} />
                         <Text style={styles.TextStyle}> Login Using Facebook </Text>
-                    </TouchableOpacity> 
+                    </TouchableOpacity>
                 </View>
-                
             </View>
         );
     }
