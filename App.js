@@ -4,7 +4,7 @@ import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import SignupProduct from './screens/SignupProduct';
 import CarouselScreen from './screens/CarouselScreen';
-import VegetablesScreen from './screens/VegetablesScreen';
+import ProductsListScreen from './screens/ProductsListScreen';
 
 const AppNavigator = createStackNavigator({
   Login: {
@@ -19,8 +19,8 @@ const AppNavigator = createStackNavigator({
   Carousel: {
     screen: CarouselScreen,
   },
-  Vegetables: {
-    screen: VegetablesScreen,
+  ProductsList: {
+    screen: ProductsListScreen,
   },
 }, {
     initialRouteName: 'Login',

@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native';
-import { Input, Item, Button, StyleProvider, Container, Header, Content, Card, CardItem, Icon, Left} from 'native-base';
+import { Input, Item, Button, StyleProvider, Container, Header, Form, Picker, Content, Card, CardItem, Icon, Left} from 'native-base';
 import axios from 'axios';
 import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
@@ -27,6 +27,7 @@ export default class SignupProduct extends React.Component {
             product_price: '',
             product_description: '',
             product_category: '',
+            selected: undefined,
         }
     }
 
@@ -50,6 +51,13 @@ export default class SignupProduct extends React.Component {
         });
     }
 
+    onValueChange(value: string) {
+
+        this.setState({
+            selected: value
+        });
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -63,37 +71,53 @@ export default class SignupProduct extends React.Component {
                     <Image source={{uri: 'https://i.imgur.com/e54hYDo.png'}} style={{height: 200, width: 200}}/>
                 </View>    
 
-                <View style={{ padding: 20, justifyContent: 'center', alignItems: 'center'}}>
-                    <Item>
+                <View style={{margin: 20}}>
+                    <Item style={{justifyContent: 'center', alignItems: 'center'}}>
                         <Input
                             onChangeText={(value) => { this.setState({ user_id: value }) }}
                             placeholder='Identificação do Usuario' />
                     </Item>
-                    <Item>
+                    <Item style={{justifyContent: 'center', alignItems: 'center'}}>
                         <Input
                             onChangeText={(value) => { this.setState({ user_email: value }) }}
                             placeholder='Email' />
                     </Item>
-                    <Item>
+                    <Item style={{justifyContent: 'center', alignItems: 'center'}}>
                         <Input
                             onChangeText={(value) => { this.setState({ product_name: value }) }}
                             placeholder='Nome do Produto' />
                     </Item>
-                    <Item>
+                    <Item style={{justifyContent: 'center', alignItems: 'center'}}>
                         <Input
                             onChangeText={(value) => { this.setState({ product_price: value }) }}
                             placeholder='Preço' />
                     </Item>
-                    <Item>
+                    <Item style={{justifyContent: 'center', alignItems: 'center'}}>
                         <Input
                             onChangeText={(value) => { this.setState({ product_description: value }) }}
                             placeholder='Descriçao do Produto' />
                     </Item>
-                    <Item>
-                        <Input
-                            onChangeText={(value) => { this.setState({ product_category: value }) }}
-                            placeholder='Categoria' />
-                    </Item>
+                    <Form>
+                        <Item picker>
+                          <Picker
+                            mode="dropdown"
+                            iosIcon={<Icon name="arrow-down" />}
+                            style={{ width: 151 }}
+                            placeholder="Selecione a categoria do seu produto"
+                            placeholderStyle={{ color: "#7FA99B" }}
+                            placeholderIconColor="#007aff"
+                            selectedValue={this.state.selected}
+                            onValueChange={this.onValueChange.bind(this)}
+                          >
+                            <Picker.Item label="Vegetais" value="key0" />
+                            <Picker.Item label="Frutas" value="key1" />
+                            <Picker.Item label="Salgados" value="key2" />
+                            <Picker.Item label="Doces" value="key3" />
+                            <Picker.Item label="Feito em Casa" value="key4" />
+                          </Picker>
+                          {(value) => { this.setState({ product_category: value }) }}
+                        </Item>
+                    </Form>
                 </View>
 
                 <View style={styles.v4}>
