@@ -21,8 +21,6 @@ export default class SignupProduct extends React.Component {
         super(props);
 
         this.state = {
-            user_id: '',
-            user_email: '',
             product_name: '',
             product_price: '',
             product_description: '',
@@ -33,15 +31,10 @@ export default class SignupProduct extends React.Component {
 
     onLogin = () => {
 
-        console.log("name: " + String(this.state.name) + "cpf: " + String(this.state.cpf) + "email: " + String(this.state.email) + " password: " + String(this.state.password));
-
         axios.post('https://food-miles.herokuapp.com/products', {
-            user_id: this.state.user_id,
-            user_email: this.state.user_email, 
             product_name: this.state.product_name, 
             product_price: this.state.product_price,
             product_description: this.state.product_description,
-            product_category: this.state.product_category,
         })
         .then(function (response) {
             console.log(response);
@@ -51,10 +44,16 @@ export default class SignupProduct extends React.Component {
         });
     }
 
-    onValueChange(value: string) {
+    onValueChange = () => {
 
-        this.setState({
-            selected: value
+        axios.post('https://food-miles.herokuapp.com/products', {
+            product_category: this.state.product_category,
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
         });
     }
 
@@ -72,16 +71,6 @@ export default class SignupProduct extends React.Component {
                 </View>    
 
                 <View style={{margin: 20}}>
-                    <Item style={{justifyContent: 'center', alignItems: 'center'}}>
-                        <Input
-                            onChangeText={(value) => { this.setState({ user_id: value }) }}
-                            placeholder='Identificação do Usuario' />
-                    </Item>
-                    <Item style={{justifyContent: 'center', alignItems: 'center'}}>
-                        <Input
-                            onChangeText={(value) => { this.setState({ user_email: value }) }}
-                            placeholder='Email' />
-                    </Item>
                     <Item style={{justifyContent: 'center', alignItems: 'center'}}>
                         <Input
                             onChangeText={(value) => { this.setState({ product_name: value }) }}
@@ -107,15 +96,14 @@ export default class SignupProduct extends React.Component {
                             placeholderStyle={{ color: "#7FA99B" }}
                             placeholderIconColor="#007aff"
                             selectedValue={this.state.selected}
-                            onValueChange={this.onValueChange.bind(this)}
+                            onValueChange={(value) => { this.setState({ product_category: value }) }}
                           >
-                            <Picker.Item label="Vegetais" value="key0" />
-                            <Picker.Item label="Frutas" value="key1" />
-                            <Picker.Item label="Salgados" value="key2" />
-                            <Picker.Item label="Doces" value="key3" />
-                            <Picker.Item label="Feito em Casa" value="key4" />
+                            <Picker.Item label="Vegetais" value="Vegetais" />
+                            <Picker.Item label="Frutas" value="Frutas" />
+                            <Picker.Item label="Salgados" value="Salgados" />
+                            <Picker.Item label="Doces" value="Doces" />
+                            <Picker.Item label="Feito em Casa" value="Feito em Casa" />
                           </Picker>
-                          {(value) => { this.setState({ product_category: value }) }}
                         </Item>
                     </Form>
                 </View>
